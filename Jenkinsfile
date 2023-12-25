@@ -19,7 +19,7 @@ pipeline {
         script {
           sh './terraformw'
 
-          def requiredVersion = sh(script: 'cat version.tf | grep required_version | cut -d"=" -f2 | tr -d \'\"\' | tr -d \'\ ""', returnStatus: true).trim()
+          def requiredVersion = sh(script: 'cat version.tf | grep required_version | cut -d"=" -f2 | tr -d \'"\' | tr -d \' \'', returnStatus: true).trim()
           def terraformVersion = sh(script: '.bin/terraform version -json | jq -r .terraform_version', returnStdout: true).trim()
 
            if (requiredVersion) {
